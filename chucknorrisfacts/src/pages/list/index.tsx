@@ -1,10 +1,16 @@
 import React from "react";
-import { Box, Checkbox, Flex, Heading, Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Checkbox, Flex, Heading, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
 import { Header } from "../../components/header/index.tsx";
 import { Sidebar } from "../../components/sidebar/index.tsx";
 import { Pagination } from "../../components/pagination";
 
 export default function FactsList() {
+
+    const isWideVersion = useBreakpointValue({
+        base: false,
+        lg: true,
+    })
+
     return (
         <Box>
             <Header />
@@ -17,31 +23,35 @@ export default function FactsList() {
                         <Heading size="lg" fontWeight="normal" >Facts List</Heading>
                     </Flex>
 
-                    <Table colorScheme="whiteAlpha">
+                    <Table colorScheme="whiteAlpha" >
                         <Thead>
                             <Tr>
-                                <Th px="6" color="gray.300" width="8">
-                                    <Checkbox colorScheme="red"/>
+                                <Th px={["2","4", "4", "6"]} color="gray.300" width="8">
+                                    <Checkbox colorScheme="red" />
                                 </Th>
-                                <Th>Id</Th>
-                                <Th>Fact</Th>
-                                <Th>Category</Th>
+                                {isWideVersion && <Th>Id</Th>}
+                                <Th px={["2","4", "4", "6"]}>Fact</Th>
+                                <Th px={["2","4", "4", "6"]}>Category</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
                             <Tr>
-                                <Td px="6">
-                                <Checkbox colorScheme="red"/>
+                                <Td px={["2","4", "4", "6"]}>
+                                    <Checkbox colorScheme="red" />
                                 </Td>
-                                <Td>
-                                    <Text fontSize="sm" color="gray.300">1</Text>
-                                </Td>
-                                <Td>
+                                {isWideVersion &&
+                                    <Td>
+                                        <Text fontSize="sm" color="gray.300">1</Text>
+                                    </Td>
+                                }
+                                <Td px={["2","4", "4", "6"]}>
                                     <Text fontSize="sm" color="gray.300">Chuck Norris uses ribbed condoms inside out, so he gets the pleasure.</Text>
                                 </Td>
-                                <Td>
+
+                                <Td px={["2","4", "4", "6"]}>
                                     <Text fontSize="sm" color="gray.300">explicit</Text>
                                 </Td>
+
                             </Tr>
                         </Tbody>
                     </Table>

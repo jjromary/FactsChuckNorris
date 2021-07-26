@@ -40,13 +40,13 @@ export function Header() {
             )}
 
             <Text
-                fontSize={["3xl", "4xl", "5xl"]}
+                fontSize={["xl", "3xl", "4xl", "5xl"]}
                 fontWeight="bold"
                 letterSpacing="tight"
             >Chuck Norris Facts</Text>
             <Icon
                 as={GiMightyForce}
-                fontSize="5xl"
+                fontSize={["xl", "3xl", "4xl", "5xl"]}
                 ml="8"
             />
         </Flex>
