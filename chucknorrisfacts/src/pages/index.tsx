@@ -3,6 +3,8 @@ import { Header } from "../components/header/index.tsx";
 import { Sidebar } from "../components/sidebar/index.tsx";
 
 export default function Home() {
+
+  
   return (
     <Flex direction="column" h="100vh" >
       <Header />
