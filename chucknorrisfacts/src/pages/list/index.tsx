@@ -1,7 +1,8 @@
 import React from "react";
 import { Box, Checkbox, Flex, Heading, Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
-import { Header } from "../../components/header/Header";
-import { Sidebar } from "../../components/sidebar/Sidebar";
+import { Header } from "../../components/header/index.tsx";
+import { Sidebar } from "../../components/sidebar/index.tsx";
+import { Pagination } from "../../components/pagination";
 
 export default function FactsList() {
     return (
@@ -44,6 +45,7 @@ export default function FactsList() {
                             </Tr>
                         </Tbody>
                     </Table>
+                    <Pagination />
                 </Box>
             </Flex>
         </Box>

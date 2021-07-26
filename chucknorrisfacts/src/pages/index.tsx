@@ -1,6 +1,6 @@
 import { Flex, SimpleGrid } from "@chakra-ui/react";
-import { Header } from "../components/header/Header";
-import { Sidebar } from "../components/sidebar/Sidebar";
+import { Header } from "../components/header/index.tsx";
+import { Sidebar } from "../components/sidebar/index.tsx";
 
 export default function Home() {
   return (
