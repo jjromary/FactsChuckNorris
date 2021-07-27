@@ -12,7 +12,6 @@ interface Facts {
 export async function getFacts(): Promise<Facts[]> {
     const { data } = await api.get('/jokes');
     
-
     const value = data.value.map(value => {
         return {
             id: value.id,
@@ -20,14 +19,22 @@ export async function getFacts(): Promise<Facts[]> {
             categories: value.categories,
         };
     });
+
     return value;
+    
 }
 
+
+
 export function useFacts() {
+
     return (
         useQuery('facts', getFacts,
             {
                 staleTime: 1000 * 5,
             })
     );
+
+
+
 }
