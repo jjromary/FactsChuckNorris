@@ -1,29 +1,13 @@
 import React from "react";
-import { useQuery } from 'react-query'
 import { Box, Checkbox, Flex, Heading, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
 import { Header } from "../../components/header/index.tsx";
 import { Sidebar } from "../../components/sidebar/index.tsx";
 import { Pagination } from "../../components/pagination";
+import { useFacts } from "../../services/hooks/useFacts";
 
 export default function FactsList() {
 
-    const { data, isLoading, error } = useQuery('facts', async () => {
-        const response = await fetch('https://api.icndb.com/jokes')
-        const data = await response.json()
-
-        const value = data.value.map(value =>{
-            return {
-                id: value.id,
-                joke: value.joke,
-                categories: value.categories
-            };
-        });
-
-        return value;
-    },
-    {
-        staleTime: 1000 * 5,
-    })
+    const { data, isLoading, isFetching, error } = useFacts()
 
     const isWideVersion = useBreakpointValue({
         base: false,
@@ -37,9 +21,12 @@ export default function FactsList() {
 
                 <Sidebar />
 
-                <Box flex="1" borderRadius={8} bg="gray.800" p="8">
+                <Box flex="1" borderRadius={8} bg="gray.800" p="8" >
                     <Flex mb="8" justify="space-between" align="center">
-                        <Heading size="lg" fontWeight="normal" >Facts List</Heading>
+                        <Heading size="lg" fontWeight="normal"  >
+                            Facts List
+                            {! isLoading && isFetching && <Spinner size="sm" ml="4"/>}
+                        </Heading>
                     </Flex>
 
                     {isLoading ? (
