@@ -26,6 +26,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - [x] Visualizar lista de fatos.
 - [x] Filtrar por categorias de fatos.
+- [x] Responsividade.
 
   
 ## 🚀 Como executar o projeto
