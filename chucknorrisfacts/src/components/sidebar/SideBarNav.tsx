@@ -1,5 +1,4 @@
 import { Stack } from "@chakra-ui/react";
-import React from "react";
 import { FaList, FaInfo } from "react-icons/fa";
 import { NavLink } from "./NavLink";
 import { NavSection } from "./NavSection";

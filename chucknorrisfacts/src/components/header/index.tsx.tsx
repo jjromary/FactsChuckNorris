@@ -23,7 +23,8 @@ export function Header() {
             px="6"
             align="center"
             justifyContent="center"
-        >
+        >   
+        {/* verificação para aparecer o botão de abrir menu Sidebar */}
             {!isWideVersion && (
 
                 <IconButton
@@ -32,7 +33,7 @@ export function Header() {
                     fontSize="24"
                     variant="unstyled"
                     onClick={onOpen}
-                    mr="8"
+                    mr="2"
                 >
                 </IconButton>
 

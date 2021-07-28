@@ -10,12 +10,13 @@ export default function FactsList() {
 
     const [itensPerPage, setItensPerPage] = useState(10)
     const [currentPage, setCurrentPage] = useState(0)
-    const [category, setCategory] = useState("ALL")
+    const [category, setCategory] = useState('')
 
     const pages = Math.ceil(data?.length / itensPerPage)
     const startIndex = currentPage * itensPerPage;
     const endIndex = startIndex + itensPerPage;
     const currentItens = data?.slice(startIndex, endIndex)
+
 
     const isWideVersion = useBreakpointValue({
         base: false,
@@ -27,54 +28,71 @@ export default function FactsList() {
         setCurrentPage(0)
     }, [itensPerPage])
 
-    const arrayNerdy = currentItens.filter(object => object.categories ); 
-    console.log('teste', arrayNerdy);
+    // LÓGICA DE FILTRAGEM PELA CATEGORIA
+    const arrayNerdy = data?.filter(object => object.categories[0] === 'nerdy')
+    const newarrayNerdy = arrayNerdy?.slice(startIndex, endIndex)
+    const pagesNerdy = Math.ceil(arrayNerdy?.length / itensPerPage)
 
+    const arrayExplict = data?.filter(object => object.categories[0] === 'explicit')
+    const newarrayExplict = arrayExplict?.slice(startIndex, endIndex)
+    const pagesExplict = Math.ceil(arrayExplict?.length / itensPerPage)
+
+    console.log('arrayNerdy', arrayNerdy)
+    console.log('arrayExplict', arrayExplict)
+    console.log('category', category)
     
-    
+    // if (category === 'Nerdy'){
+    //     const currentItens = arrayNerdy.filter(object => object.categories[0] === 'nerdy')
+    //     const pages = Math.ceil(arrayNerdy?.length / itensPerPage)        
+    // }
     return (
         <Box>
-            <Header />
-            <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6" >
+            <Header  />
+            
+            <Flex 
+                w="100%" 
+                my="6" 
+                maxWidth={1480} 
+                mx="auto" 
+                px="6" 
+            >
                 <Sidebar />
 
-                <Box 
-                    flex="1" 
-                    borderRadius={8} 
-                    bg="gray.800" 
-                    p="8" 
+                <Box
+                    flex="1"
+                    borderRadius={8}
+                    bg="gray.800"
+                    p="8"
                 >
-                    <Flex 
-                        mb="8" 
-                        justify="space-between" 
+                    <Flex
+                        mb="8"
+                        justify="space-between"
                         align="center"
                     >
-                        <Heading 
-                            size="lg" 
-                            fontWeight="normal"  
+                        <Heading
+                            size="lg"
+                            fontWeight="normal"
                         >
                             Facts List
                             {!isLoading && isFetching && <Spinner size="sm" ml="4" />}
                         </Heading>
                         <Box size="xl">
                             <Text>Ordenar por</Text>
-
-                            <Select 
-                                size="sm" 
-                                w="150px" 
-                                fontSize="sm" 
-                                colorScheme='gray.500' 
-                                color="gray.500" 
+                            <Select
+                                size="sm"
+                                w="150px"
+                                fontSize="sm"
+                                colorScheme='gray.500'
+                                color="gray.500"
                                 cursor="pointer"
                                 className="custom-select"
-                                aria-label="Filter by category" 
-                                onChange={(e) => {setCategory(e.target.value)}}
+                                aria-label="Filter by category"
+                                onChange={(e) => { setCategory(e.target.value) }}
                             >
-                                
                                 <option value={'Nerdy'} placeholder="Filled" >Nerdy</option>
                                 <option value={'Explicit'} placeholder="Filled" >Explicit</option>
                                 <option value={' '} placeholder="Filled" >Clean</option>
-                                
+
                             </Select>
                         </Box>
                     </Flex>
@@ -92,9 +110,7 @@ export default function FactsList() {
                             <Table colorScheme="whiteAlpha" >
                                 <Thead>
                                     <Tr>
-                                        <Th px={["2", "4", "4", "6"]} color="gray.300" width="8">
-                                            <Checkbox colorScheme="red" />
-                                        </Th>
+                                        
                                         {isWideVersion && <Th>Id</Th>}
                                         <Th px={["2", "4", "4", "6"]}>Fact</Th>
                                         <Th px={["2", "4", "4", "6"]}>Category</Th>
@@ -105,10 +121,9 @@ export default function FactsList() {
                                     {/* LISTANDO FATOS NA TELA */}
                                     {currentItens.map(data => {
                                         return (
+                                            
                                             <Tr key={data.id}>
-                                                <Td px={["2", "4", "4", "6"]}>
-                                                    <Checkbox colorScheme="red" />
-                                                </Td>
+                                                
                                                 {isWideVersion &&
                                                     <Td>
                                                         <Text fontSize="sm" color="gray.300">{data.id}</Text>
@@ -117,18 +132,12 @@ export default function FactsList() {
                                                 <Td px={["2", "4", "4", "6"]}>
                                                     <Text fontSize="sm" color="gray.300">{data.joke}</Text>
                                                 </Td>
-
                                                 <Td px={["2", "4", "4", "6"]}>
                                                     <Text fontSize="sm" color="gray.300">{data.categories}</Text>
                                                 </Td>
-
                                             </Tr>
-
                                         )
                                     }
-
-
-
                                     )}
 
                                 </Tbody>
@@ -136,25 +145,32 @@ export default function FactsList() {
 
                             <Stack spacing="2">
                                 {/*LÓGICA DE FATOS POR PÁGINA  */}
-                                <Text mt="4">Facts per page</Text>
-                                <Select colorScheme="whiteAlpha" size="sm" w="150px" mt="6" color="gray.500" cursor="pointer" value={itensPerPage} onChange={(e) => setItensPerPage(Number(e.target.value))}>
+                                <Text
+                                    mt="4"
+                                >Facts per page
+                                </Text>
+                                <Select
+                                    colorScheme="whiteAlpha"
+                                    size="sm"
+                                    w="150px"
+                                    mt="6"
+                                    color="gray.500"
+                                    cursor="pointer"
+                                    value={itensPerPage}
+                                    onChange={(e) => setItensPerPage(Number(e.target.value))}
+                                >
                                     <option value={5} placeholder="Filled">5</option>
                                     <option value={10} placeholder="Filled">10</option>
-                                    {/* <option value={30} placeholder="Filled">30</option>
-                                    <option value={40} placeholder="Filled">40</option>
-                                    <option value={50} placeholder="Filled">50</option>
-                                    <option value={60} placeholder="Filled">60</option>
-                                    <option value={70} placeholder="Filled">70</option>
-                                    <option value={80} placeholder="Filled">80</option>
-                                    <option value={90} placeholder="Filled">90</option>
-                                    <option value={100} placeholder="Filled">100</option> */}
                                 </Select>
 
 
                                 {/* LÓGICA DA PAGINAÇÃO */}
-                                <Box mt="8" spacing="6"
+                                <Box
+                                    mt="8"
+                                    spacing="6"
                                     justify="space-between"
-                                    alignItems="center">
+                                    alignItems="center"
+                                >
                                     {Array.from(Array(pages), (data, index) => {
                                         return (
                                             <Button size="sm"
@@ -170,11 +186,7 @@ export default function FactsList() {
                                     })}
                                 </Box>
                             </Stack>
-
-
-                            {/* <Pagination /> */}
                         </>
-
                     )}
                 </Box>
             </Flex>
