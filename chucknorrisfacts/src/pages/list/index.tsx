@@ -46,8 +46,10 @@ export default function FactsList() {
     //     const pages = Math.ceil(arrayNerdy?.length / itensPerPage)        
     // }
     return (
-        <Box>
-            <Header  />
+        <Box >
+            <Box position="sticky">
+            <Header />
+            </Box>
             
             <Flex 
                 w="100%" 
@@ -107,7 +109,7 @@ export default function FactsList() {
                         </Flex>
                     ) : (
                         <>
-                            <Table colorScheme="whiteAlpha" >
+                            <Table colorScheme="whiteAlpha"  >
                                 <Thead>
                                     <Tr>
                                         
@@ -116,8 +118,9 @@ export default function FactsList() {
                                         <Th px={["2", "4", "4", "6"]}>Category</Th>
                                     </Tr>
                                 </Thead>
+                                
                                 <Tbody>
-
+                                
                                     {/* LISTANDO FATOS NA TELA */}
                                     {currentItens.map(data => {
                                         return (
@@ -140,6 +143,7 @@ export default function FactsList() {
                                     }
                                     )}
 
+                                
                                 </Tbody>
                             </Table>
 

@@ -22,7 +22,7 @@ export default function About() {
                         alignItems="center"
                         // justifyContent="space-evenly"
                     >
-                        <Box   >
+                        <Box boxShadow="dark-lg">
                             <Image
                                 borderRadius="full"
                                 boxSize="200px"
