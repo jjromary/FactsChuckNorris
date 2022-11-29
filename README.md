@@ -12,7 +12,7 @@
 
 ## 💻 Sobre o projeto
 
- - Projeto criado para listar todos os feitos alcançados por Chuck Norris. Desenvolvido para o Teste Dev Front-End jr. Truckpag.
+ - Projeto criado para listar todos os feitos alcançados por Chuck Norris.
 
 
 ## 🛠 Tecnologias
